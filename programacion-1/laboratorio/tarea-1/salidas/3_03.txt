@@ -1,0 +1,49 @@
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese dos números: 
+Son anagramas.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese dos números: 
+Son anagramas.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese dos números: 
+No son anagramas.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese dos números: 
+Son anagramas.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ejecución finalizada.

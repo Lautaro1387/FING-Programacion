@@ -1,0 +1,33 @@
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese la cantidad de ocurrencias de cada uno de los siguentes dígitos
+0 1 2 3 4 5 6 7 8 9:
+Ingrese el número a evaluar: 
+No es histograma.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese la cantidad de ocurrencias de cada uno de los siguentes dígitos
+0 1 2 3 4 5 6 7 8 9:
+Ingrese el número a evaluar: 
+Es histograma.
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ejecución finalizada.

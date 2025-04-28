@@ -1,0 +1,2 @@
+type
+	Natural = LongWord;

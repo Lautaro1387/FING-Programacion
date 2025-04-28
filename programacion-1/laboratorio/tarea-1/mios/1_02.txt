@@ -1,0 +1,42 @@
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese un número: 
+Último dígito: 5
+Número sin el último dígito: 1234
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese un número: 
+Último dígito: 1
+Número sin el último dígito: 5432
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese un número: 
+Último dígito: 4
+Número sin el último dígito: 438948
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ejecución finalizada.

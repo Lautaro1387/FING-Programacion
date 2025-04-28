@@ -1,0 +1,31 @@
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese un número: 
+Último dígito: 4
+Número sin el último dígito: 29834848
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ingrese un número: 
+Último dígito: 5
+Número sin el último dígito: 429496729
+--------------------------------
+Ingrese Opción
+--------------------------------
+0=Fin
+1=Extraer último dígito
+2=Chequear histograma
+3=Chequear anagramas
+--------------------------------
+Ejecución finalizada.
