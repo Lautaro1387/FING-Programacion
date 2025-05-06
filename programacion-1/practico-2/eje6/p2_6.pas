@@ -20,7 +20,6 @@ end.
 
 
 
-  d       := totalMin div 1440;     {días completos}
 
   h       := totalMin div 60;       {horas restantes}
   m       := totalMin mod 60;       {minutos restantes}
