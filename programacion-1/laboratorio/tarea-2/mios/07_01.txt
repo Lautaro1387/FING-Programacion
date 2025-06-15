@@ -23,7 +23,8 @@ Ingrese una posición:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 Siguiente posición:
-A1 Vertical ----- MENÚ PROBAR SUBPROGRAMAS -----
+B1 Vertical 
+----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
 3. Calcular histograma texto 
@@ -41,7 +42,8 @@ Ingrese una posición:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 Siguiente posición:
-A1 Horizontal ----- MENÚ PROBAR SUBPROGRAMAS -----
+A2 Horizontal 
+----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
 3. Calcular histograma texto 
@@ -59,7 +61,8 @@ Ingrese una posición:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 Siguiente posición:
-D8 Horizontal ----- MENÚ PROBAR SUBPROGRAMAS -----
+D9 Horizontal 
+----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
 3. Calcular histograma texto 
@@ -77,7 +80,8 @@ Ingrese una posición:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 Siguiente posición:
-H2 Vertical ----- MENÚ PROBAR SUBPROGRAMAS -----
+I2 Vertical 
+----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
 3. Calcular histograma texto 

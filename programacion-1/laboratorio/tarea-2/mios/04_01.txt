@@ -21,7 +21,7 @@ Seleccione una opción:
 Seleccione una opción: 
 Ingrese el nombre del archivo de texto a tomar como diccionario:
 Ingrese la palabra a consultar:
-La palabra NO está en el diccionario.
+La palabra está en el diccionario.
 ----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 

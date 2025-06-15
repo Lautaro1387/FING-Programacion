@@ -26,7 +26,7 @@ type
       cadena : array [1 .. MAXPAL] of Letra;
       tope   : 0 .. MAXPAL
    end;
- 
+
    Histograma =  array [Letra] of integer;
 
    InfoFicha = record
@@ -230,7 +230,7 @@ begin
          if acumulado >= target then
          begin
             ifichas[c].cantidad := ifichas[c].cantidad + 1;
-            Inc(cantidadFichas);
+            cantidadFichas := cantidadFichas + 1;
             encontrada := true;
          end
          else
@@ -424,8 +424,14 @@ begin
 end;
 
 function obtenerIndiceNuevaFicha(bolsa : BolsaFichas) : integer;
+var 
+   i : integer;
 begin
-   obtenerIndiceNuevaFicha := random(bolsa.tope + 1)
+   repeat
+      i := random(bolsa.tope + 1)
+   until i <> 0; { Asegura que el índice no sea cero y mantiene los resultados anteriores }
+   obtenerIndiceNuevaFicha := i
+   // obtenerIndiceNuevaFicha := random(bolsa.tope) + 1
 end;
 
 procedure mostrarAtril(mano : Atril; iFichas : InfoFichas);
@@ -463,7 +469,7 @@ begin
       leerMayuscula(input, cf);
       readln(cc);
       writeln('Ingrese la direccion de la palabra, H (horizonal) o V (vertical):');
-      readln(caux);
+      leerMayuscula(input,caux);
       pos.fila := cf;
       pos.col := cc;
       if caux = 'H' then

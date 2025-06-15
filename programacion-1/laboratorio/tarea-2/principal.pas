@@ -201,6 +201,7 @@ begin
                             siguientePosicion(pos);
                             writeln('Siguiente posición:');
                             imprimirPosicion(pos);
+                            writeln
                         end;
                         8: begin // Puede armar palabra
                             rellenarAtril(mano);
