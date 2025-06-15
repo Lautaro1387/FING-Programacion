@@ -1,0 +1,4 @@
+24c24
+< La palabra está en el diccionario.
+---
+> La palabra NO está en el diccionario.

@@ -1,0 +1,28 @@
+
+----- MENÚ TAREA2 -----
+1. Pascrabble 
+2. Probar subprogramas individualmente 
+0. Salir
+------------------------
+Seleccione una opción: 
+----- MENÚ PROBAR SUBPROGRAMAS -----
+1. Calcular histograma palabra 
+2. Comparar palabras 
+3. Calcular histograma texto 
+4. Es palabra válida 
+5. Remover letra del atril 
+6. Entra en tablero 
+7. Siguiente posición 
+8. Puede armar palabra 
+9. Armar palabra 
+10. Registrar jugada 
+0. Salir 
+------------------------
+Seleccione una opción: 
+Ingrese el nombre del archivo de texto a tomar como diccionario:
+Runtime error 201 at $0000000000403935
+  $0000000000403935  CALCULARHISTOGRAMA,  line 9 of tarea2.pas
+  $0000000000403AAE  CALCULARHISTOGRAMATEXTO,  line 46 of tarea2.pas
+  $00000000004052A6  main,  line 218 of principal.pas
+  $00000000004275CC
+

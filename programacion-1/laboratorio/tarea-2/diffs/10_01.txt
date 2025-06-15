@@ -1,0 +1,15 @@
+29,32c29
+< Historial de jugadas:
+< Palabra        Coordenadas        Dirección        Puntaje
+< ----------------------------------------------------------
+< hola                A3            Vertical           15
+---
+> No hay jugadas en registradas.
+61,65c58
+< Historial de jugadas:
+< Palabra        Coordenadas        Dirección        Puntaje
+< ----------------------------------------------------------
+< palabra             A1            Horizonal          21
+< juego               B1            Vertical           7
+---
+> No hay jugadas en registradas.
