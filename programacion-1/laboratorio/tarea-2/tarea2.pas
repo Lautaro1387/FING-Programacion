@@ -36,16 +36,15 @@ begin
     end;
 end;
    }
-var i : integer;
+   var i : char;
 begin
-    for i := 1 to tex^.info.tope do
-    begin
-        hist[tex^.info.cadena[i]] := 0; // Inicializar el histograma
+// Inicializar el histograma
+    for i := 'a' to 'z' do
+        hist[i] := 0;
     while (tex <> nil) do
     begin
         calcularHistograma(tex^.info, hist);
-    end;
-    tex := tex^.sig;
+        tex := tex^.sig;
     end;
 end;
 
