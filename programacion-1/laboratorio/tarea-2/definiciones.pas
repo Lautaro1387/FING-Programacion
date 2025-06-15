@@ -26,7 +26,7 @@ type
       cadena : array [1 .. MAXPAL] of Letra;
       tope   : 0 .. MAXPAL
    end;
-
+ 
    Histograma =  array [Letra] of integer;
 
    InfoFicha = record

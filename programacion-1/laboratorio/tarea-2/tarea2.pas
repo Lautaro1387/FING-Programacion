@@ -18,27 +18,9 @@ end;
 
 procedure calcularHistogramaTexto(tex : Texto; var hist : Histograma);
 { 3 - Retorna en `hist` la cantidad de ocurrencias de cada letra en el texto `tex`.
-No se puede asumir el estado inicial de `hist`.  
-   Texto	= ^NodoPal; 
-   NodoPal	= record  
-      info : Palabra;
-      sig  : Texto
-   end;
-   procedure calcularHistograma(pal : Palabra; var hist : Histograma);
-{ 1 - Retorna en `hist` el histograma de `pal`, es decir la cantidad
- de ocurrencias de cada letra en esa palabra.
-No se puede asumir el estado inicial de histograma. 
-var i : integer;
-begin
-    for i := 1 to pal.tope do
-    begin
-        hist[pal.cadena[i]] := hist[pal.cadena[i]] + 1;
-    end;
-end;
-   }
+No se puede asumir el estado inicial de `hist`.  }
    var i : char;
 begin
-// Inicializar el histograma
     for i := 'a' to 'z' do
         hist[i] := 0;
     while (tex <> nil) do
@@ -58,7 +40,7 @@ está en el texto dicc.
    end;}
 begin
     esPalabraValida := false; 
-    while (dicc <> nil) do 
+    while (dicc <> nil) do
     begin
         if iguales(pal, dicc^.info) then
         begin
