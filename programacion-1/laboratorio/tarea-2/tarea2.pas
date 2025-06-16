@@ -123,8 +123,30 @@ end;
 function puedeArmarPalabra(pal : Palabra; pos : Posicion; mano : Atril; tab : Tablero) : boolean;
 { 8 - Verifica que la palabra `pal` puede armarse a partir de la posición `pos`, 
  considerando las letras disponibles en el atril y en el tablero (respetando su ubicación).
- Se puede asumir que la palabra entra en el tablero. }
+ Se puede asumir que la palabra entra en el tablero.
+    Palabra	= record
+      cadena : array [1 .. MAXPAL] of Letra;
+      tope   : 0 .. MAXPAL
+   end;
+ 
+   Tablero = array['A'..MAXFILAS, 1..MAXCOLUMNAS] of Casillero;
+
+   TipoDireccion = (Horizontal, Vertical);
+   Posicion = record
+      direccion : TipoDireccion;
+      fila : 'A'..MAXFILAS;
+      col  : 1..MAXCOLUMNAS;
+   end;
+   Atril = record
+      letras : array[1..MAXATRIL] of Letra;
+      tope : 0 .. MAXATRIL;
+            cantidad de letras en la mano 
+
+   end; 
+  }
 begin
+    entraEnTablero(pal.tope, pos);
+    puedeArmarPalabra := true; 
 
 end;
 
