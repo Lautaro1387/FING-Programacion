@@ -1,8 +1,0 @@
-147c147
-< NO se puede armar la palabra.
----
-> Se puede armar la palabra.
-217c217
-< NO se puede armar la palabra.
----
-> Se puede armar la palabra.

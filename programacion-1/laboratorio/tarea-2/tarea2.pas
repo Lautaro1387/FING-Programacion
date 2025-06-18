@@ -143,11 +143,53 @@ function puedeArmarPalabra(pal : Palabra; pos : Posicion; mano : Atril; tab : Ta
             cantidad de letras en la mano 
 
    end; 
-  }
+     TipoBonus = (Ninguno, DobleLetra, TriplePalabra, Trampa);
+   { tipo de los bonos }
+  {
+   Casillero = record
+      bonus : TipoBonus;
+      case ocupada : boolean of
+         true : (ficha : Letra);
+         false : (); 
+         { si no está ocupada, no hay letra }
+  {  end }
+  
+var i, j : integer;
+encontrada : boolean;
 begin
-    entraEnTablero(pal.tope, pos);
-    puedeArmarPalabra := true; 
-
+    { Verifica que la palabra puede armarse a partir de la posición `pos` }
+    { Se asume que la palabra entra en el tablero }
+    puedeArmarPalabra := false;
+    puedeArmarPalabra := entraEnTablero(pal, pos);
+    for i := 1 to pal.tope do
+    begin
+        encontrada := false;
+        for j := 1 to mano.tope do
+        begin
+            if (tab[pos.fila, pos.col].ocupada) and (tab[pos.fila, pos.col].ficha = pal.cadena[i]) then
+            begin
+                { Si la letra ya está en el tablero, no se necesita de la mano }
+                encontrada := true;
+            end
+            else if (tab[pos.fila, pos.col].ocupada) and (tab[pos.fila, pos.col].ficha <> pal.cadena[i]) then
+            begin
+                { Si la letra no está en el tablero, se pasa a la siguiente letra }
+                encontrada := false;
+            end
+            else if (tab[pos.fila, pos.col].ocupada = false) and (mano.letras[j] = pal.cadena[i]) then
+            begin
+                { Si la letra está en el atril, se puede usar }
+                removerLetraAtril(mano, pal.cadena[i]);
+                encontrada := true;
+            end
+        end;
+        if not encontrada then
+            puedeArmarPalabra := false;
+        if (Ord(pos.fila) < Ord(MAXFILAS)) and (pos.col < MAXCOLUMNAS) and encontrada then
+            { Si la letra no está en el tablero ni en el atril, se pasa a la siguiente letra }
+            siguientePosicion(pos);
+    end;
+    { Verifica que la palabra entra en el tablero } 
 end;
 
 procedure intentarArmarPalabra(pal : Palabra; pos : Posicion; 
@@ -165,9 +207,28 @@ la información de `info` y la bonificación del casillero. Tanto para el puntaj
 como para las bonificaciones **NO** suman las letras ya existentes en el tablero que conforman la palabra. 
 Si no se puede armar la palabra, devuelve el resultado correspondiente en `resu.tipo`. }
 begin
+    if entraEnTablero(pal, pos) and (puedeArmarPalabra(pal, pos, mano, tab)) and (esPalabraValida(pal, dicc)) then
+    begin
+        puedeArmarPalabra(pal, pos, mano, tab)
+    end;
 end;
 
 procedure registrarJugada(var jugadas : HistorialJugadas; pal : Palabra; pos : Posicion; puntaje : integer);
-{ 10 - Dada una lista de jugadas, una palabra, Posicion y puntaje, agrega la jugada al final de la lista }
+{ 10 - Dada una lista de jugadas, una palabra, Posicion y puntaje, agrega la jugada al final de la lista 
+
+   HistorialJugadas = ^NodoJugada;
+   NodoJugada = record
+      palabra : Palabra;
+      pos : Posicion;
+      puntaje : integer;
+      sig : HistorialJugadas
+   end;
+}
+var listaNueva : integer;
 begin
+    if jugadas = nil then
+        jugadas := jugadas^.sig
+    else
+        jugadas := jugadas^.sig;
+    { Agrega la jugada al final de la lista }
 end;

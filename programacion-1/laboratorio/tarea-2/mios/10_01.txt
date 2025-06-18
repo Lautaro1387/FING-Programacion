@@ -25,56 +25,8 @@ Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = 
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 
 Ingrese el puntaje de la jugada:
+Runtime error 216 at $000000000040417B
+  $000000000040417B  REGISTRARJUGADA,  line 230 of tarea2.pas
+  $0000000000405C60  main,  line 255 of principal.pas
+  $0000000000427AAC
 
-No hay jugadas en registradas.
-
------ MENÚ PROBAR SUBPROGRAMAS -----
-1. Calcular histograma palabra 
-2. Comparar palabras 
-3. Calcular histograma texto 
-4. Es palabra válida 
-5. Remover letra del atril 
-6. Entra en tablero 
-7. Siguiente posición 
-8. Puede armar palabra 
-9. Armar palabra 
-10. Registrar jugada 
-0. Salir 
-------------------------
-Seleccione una opción: 
-Ingrese la cantidad de jugadas a registrar:
-Ingrese la palabra:
-Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
-Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
-
-Ingrese el puntaje de la jugada:
-
-Ingrese la palabra:
-Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
-Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
-
-Ingrese el puntaje de la jugada:
-
-No hay jugadas en registradas.
-
------ MENÚ PROBAR SUBPROGRAMAS -----
-1. Calcular histograma palabra 
-2. Comparar palabras 
-3. Calcular histograma texto 
-4. Es palabra válida 
-5. Remover letra del atril 
-6. Entra en tablero 
-7. Siguiente posición 
-8. Puede armar palabra 
-9. Armar palabra 
-10. Registrar jugada 
-0. Salir 
-------------------------
-Seleccione una opción: 
-
------ MENÚ TAREA2 -----
-1. Pascrabble 
-2. Probar subprogramas individualmente 
-0. Salir
-------------------------
-Seleccione una opción: 

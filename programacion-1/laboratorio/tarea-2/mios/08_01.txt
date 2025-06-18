@@ -144,7 +144,7 @@ Ingrese la palabra:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 
-Se puede armar la palabra.
+NO se puede armar la palabra.
 ----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
@@ -214,7 +214,7 @@ Ingrese la palabra:
 Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = A y col = 3, ingresar A3:
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 
-Se puede armar la palabra.
+NO se puede armar la palabra.
 ----- MENÚ PROBAR SUBPROGRAMAS -----
 1. Calcular histograma palabra 
 2. Comparar palabras 
