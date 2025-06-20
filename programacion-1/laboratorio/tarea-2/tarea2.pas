@@ -123,36 +123,7 @@ end;
 function puedeArmarPalabra(pal : Palabra; pos : Posicion; mano : Atril; tab : Tablero) : boolean;
 { 8 - Verifica que la palabra `pal` puede armarse a partir de la posición `pos`, 
  considerando las letras disponibles en el atril y en el tablero (respetando su ubicación).
- Se puede asumir que la palabra entra en el tablero.
-    Palabra	= record
-      cadena : array [1 .. MAXPAL] of Letra;
-      tope   : 0 .. MAXPAL
-   end;
- 
-   Tablero = array['A'..MAXFILAS, 1..MAXCOLUMNAS] of Casillero;
-
-   TipoDireccion = (Horizontal, Vertical);
-   Posicion = record
-      direccion : TipoDireccion;
-      fila : 'A'..MAXFILAS;
-      col  : 1..MAXCOLUMNAS;
-   end;
-   Atril = record
-      letras : array[1..MAXATRIL] of Letra;
-      tope : 0 .. MAXATRIL;
-            cantidad de letras en la mano 
-
-   end; 
-     TipoBonus = (Ninguno, DobleLetra, TriplePalabra, Trampa);
-   { tipo de los bonos }
-  {
-   Casillero = record
-      bonus : TipoBonus;
-      case ocupada : boolean of
-         true : (ficha : Letra);
-         false : (); 
-         { si no está ocupada, no hay letra }
-  {  end }
+ Se puede asumir que la palabra entra en el tablero. }
   
 var i, j : integer;
 encontrada : boolean;
@@ -205,13 +176,99 @@ almacena el puntaje en `resu.puntaje`.
 Para calcular el puntaje, se suman los puntos de las letras **agregadas**, utilizando 
 la información de `info` y la bonificación del casillero. Tanto para el puntaje calculado
 como para las bonificaciones **NO** suman las letras ya existentes en el tablero que conforman la palabra. 
-Si no se puede armar la palabra, devuelve el resultado correspondiente en `resu.tipo`. }
+Si no se puede armar la palabra, devuelve el resultado correspondiente en `resu.tipo`.
+
+   TipoResultado = (Valida, NoEntra, NoFichas, NoExiste);
+  Letra        = 'a' .. 'z';
+   Palabra	= record
+      cadena : array [1 .. MAXPAL] of Letra;
+      tope   : 0 .. MAXPAL
+   end; 
+
+
+   InfoFicha = record
+      puntaje : integer;
+      cantidad : integer;
+   end;
+
+   InfoFichas = array[Letra] of InfoFicha;
+
+   TipoBonus = (Ninguno, DobleLetra, TriplePalabra, Trampa);
+    tipo de los bonos 
+
+   Casillero = record
+      bonus : TipoBonus;
+      case ocupada : boolean of
+         true : (ficha : Letra);
+         false : ();  si no está ocupada, no hay letra 
+   end;
+
+   // lista de palabras, que representa a un texto 
+   Texto	= ^NodoPal; 
+   NodoPal	= record  
+      info : Palabra;
+      sig  : Texto
+   end;
+
+   Tablero = array['A'..MAXFILAS, 1..MAXCOLUMNAS] of Casillero;
+
+   TipoDireccion = (Horizontal, Vertical);
+                         // Posicion de la palabra 
+   Posicion = record
+      direccion : TipoDireccion;
+      fila : 'A'..MAXFILAS;
+      col  : 1..MAXCOLUMNAS;
+   end;
+
+   ResultadoJugada = record
+      palabra : Palabra;
+      pos : Posicion;
+      case tipo : TipoResultado of
+         Valida : (puntaje : integer);
+         NoEntra : ();
+         NoFichas : ();
+         NoExiste  : ();
+   end;
+}
+var i, j : integer;
+    posTemp: Posicion;
+    triple : boolean;
 begin
-    if entraEnTablero(pal, pos) and (puedeArmarPalabra(pal, pos, mano, tab)) and (esPalabraValida(pal, dicc)) then
+    resu.puntaje := 0;
+    posTemp := pos;
+    for i := 1 to pal.tope do
+        resu.palabra.cadena[i] := pal.cadena[i];  
+    if not entraEnTablero(pal, posTemp) then
+        resu.tipo := NoEntra
+    else if not puedeArmarPalabra(pal, posTemp, mano, tab) then
+        resu.tipo := NoFichas
+    else if not esPalabraValida(pal, dicc) then
+        resu.tipo := NoExiste
+    else
     begin
-        puedeArmarPalabra(pal, pos, mano, tab)
+        resu.tipo := Valida;
+        for j := 1 to pal.tope do
+        begin
+            if not tab[posTemp.fila, posTemp.col].ocupada then
+            begin
+                resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje;
+                case tab[posTemp.fila, posTemp.col].bonus of
+                    Ninguno: resu.puntaje := resu.puntaje;
+                    DobleLetra: resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje * 2;
+                    TriplePalabra: 
+                    begin
+                        triple := true;
+                        resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje;
+                        resu.puntaje := resu.puntaje * 3;
+                    end;
+                    Trampa: resu.puntaje := resu.puntaje - info[pal.cadena[j]].puntaje;
+                end;
+            end;
+            siguientePosicion(posTemp);
+        end;
     end;
 end;
+
 
 procedure registrarJugada(var jugadas : HistorialJugadas; pal : Palabra; pos : Posicion; puntaje : integer);
 { 10 - Dada una lista de jugadas, una palabra, Posicion y puntaje, agrega la jugada al final de la lista 
@@ -224,11 +281,23 @@ procedure registrarJugada(var jugadas : HistorialJugadas; pal : Palabra; pos : P
       sig : HistorialJugadas
    end;
 }
-var listaNueva : integer;
+var i : integer;
+    nodo : HistorialJugadas;
 begin
-    if jugadas = nil then
-        jugadas := jugadas^.sig
-    else
+    i := 1;
+    while (jugadas^.sig <> nil) do
+    begin
         jugadas := jugadas^.sig;
+        puntaje := jugadas^.puntaje + puntaje;
+        i := i + 1;
+    end;
+    new(nodo);{ Crea un nuevo nodo para la jugada }
+    nodo^.palabra := pal; { Asigna la palabra a la jugada }
+    nodo^.pos := pos; { Asigna la posición a la jugada }
+    nodo^.puntaje := puntaje; { Asigna el puntaje a la jugada }
+    nodo^.sig := nil;
+
+
     { Agrega la jugada al final de la lista }
+
 end;
