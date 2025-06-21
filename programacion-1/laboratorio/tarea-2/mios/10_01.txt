@@ -25,8 +25,8 @@ Ingrese las coordenadas iniciales de la palabra (fila, columna). Ejemplo fila = 
 Ingrese la direccion de la palabra, H (horizonal) o V (vertical):
 
 Ingrese el puntaje de la jugada:
-Runtime error 216 at $00000000004044E9
-  $00000000004044E9  REGISTRARJUGADA,  line 288 of tarea2.pas
-  $0000000000406010  main,  line 255 of principal.pas
-  $0000000000427E5C
+Runtime error 216 at $0000000000404437
+  $0000000000404437  REGISTRARJUGADA,  line 303 of tarea2.pas
+  $0000000000405F40  main,  line 255 of principal.pas
+  $0000000000427D8C
 

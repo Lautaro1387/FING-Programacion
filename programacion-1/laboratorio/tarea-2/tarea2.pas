@@ -66,23 +66,19 @@ procedure removerLetraAtril(var mano : Atril; let : char);
 { 5 - Dada una letra `let`, elimina la primera aparición de esta
  del atril y deja a su lugar la última letra del atril.
 Se asume que la letra está en el atril.  }
-var i, pos : integer;
+var i : integer;
 begin
-    pos := 0;
-    for i := 1 to mano.tope do
+    i := 1;
+    while i <= mano.tope do
     begin
         if mano.letras[i] = let then
         begin
-            pos := i;
             mano.letras[i] := mano.letras[mano.tope];
             mano.tope := mano.tope - 1;
-        end;
-        if (pos = 0) and (i = mano.tope) then
-        { Si no se encontró la letra, no se hace nada }
-        begin
-            mano.letras[i] := mano.letras[mano.tope];
-            mano.tope := mano.tope - 1;
+            i := mano.tope + 1; { salgo del bucle }
         end
+        else
+            i := i + 1;
     end;
 end;
 
@@ -120,48 +116,53 @@ begin
         pos.fila := succ(pos.fila);
 end;
 
-function puedeArmarPalabra(pal : Palabra; pos : Posicion; mano : Atril; tab : Tablero) : boolean;
-{ 8 - Verifica que la palabra `pal` puede armarse a partir de la posición `pos`, 
- considerando las letras disponibles en el atril y en el tablero (respetando su ubicación).
- Se puede asumir que la palabra entra en el tablero. }
-  
-var i, j : integer;
-encontrada : boolean;
+function puedeArmarPalabra(pal : Palabra; pos : Posicion;
+                           mano : Atril;  tab : Tablero) : boolean;
+var
+   i, j          : integer;
+   posAux        : Posicion;
+   manoAux       : Atril;
+   ok, encontrada: boolean;
 begin
-    { Verifica que la palabra puede armarse a partir de la posición `pos` }
-    { Se asume que la palabra entra en el tablero }
-    puedeArmarPalabra := false;
-    puedeArmarPalabra := entraEnTablero(pal, pos);
-    for i := 1 to pal.tope do
-    begin
-        encontrada := false;
-        for j := 1 to mano.tope do
-        begin
-            if (tab[pos.fila, pos.col].ocupada) and (tab[pos.fila, pos.col].ficha = pal.cadena[i]) then
+   ok      := entraEnTablero(pal, pos);
+   posAux  := pos;
+   manoAux := mano;
+   i       := 1;
+
+   while (i <= pal.tope) and ok do
+   begin
+      encontrada := false;
+
+      { casillero ocupado }
+      if tab[posAux.fila, posAux.col].ocupada then
+      begin
+         if tab[posAux.fila, posAux.col].ficha = pal.cadena[i] then
+            encontrada := true;
+      end
+      { casillero libre}
+      else
+      begin
+         j := 1;
+         while (j <= manoAux.tope) and (not encontrada) do
+         begin
+            if manoAux.letras[j] = pal.cadena[i] then
             begin
-                { Si la letra ya está en el tablero, no se necesita de la mano }
-                encontrada := true;
+               removerLetraAtril(manoAux, pal.cadena[i]);
+               encontrada := true
             end
-            else if (tab[pos.fila, pos.col].ocupada) and (tab[pos.fila, pos.col].ficha <> pal.cadena[i]) then
-            begin
-                { Si la letra no está en el tablero, se pasa a la siguiente letra }
-                encontrada := false;
-            end
-            else if (tab[pos.fila, pos.col].ocupada = false) and (mano.letras[j] = pal.cadena[i]) then
-            begin
-                { Si la letra está en el atril, se puede usar }
-                removerLetraAtril(mano, pal.cadena[i]);
-                encontrada := true;
-            end
-        end;
-        if not encontrada then
-            puedeArmarPalabra := false;
-        if (Ord(pos.fila) < Ord(MAXFILAS)) and (pos.col < MAXCOLUMNAS) and encontrada then
-            { Si la letra no está en el tablero ni en el atril, se pasa a la siguiente letra }
-            siguientePosicion(pos);
-    end;
-    { Verifica que la palabra entra en el tablero } 
+            else
+               j := j + 1;  { sigo buscando }
+         end;
+      end;
+      ok := encontrada;
+      if ok and (i < pal.tope) then
+         siguientePosicion(posAux);
+      i := i + 1;
+   end;
+
+   puedeArmarPalabra := ok;
 end;
+
 
 procedure intentarArmarPalabra(pal : Palabra; pos : Posicion; 
                               var tab : Tablero; var mano : Atril; 
@@ -230,14 +231,16 @@ Si no se puede armar la palabra, devuelve el resultado correspondiente en `resu.
          NoExiste  : ();
    end;
 }
-var i, j : integer;
+var i, puntajeLetra : integer;
     posTemp: Posicion;
-    triple : boolean;
+    triple : integer;
 begin
+    resu.tipo := Valida;
     resu.puntaje := 0;
+    resu.palabra := pal;
+    resu.pos := pos;
     posTemp := pos;
-    for i := 1 to pal.tope do
-        resu.palabra.cadena[i] := pal.cadena[i];  
+    triple := 1;
     if not entraEnTablero(pal, posTemp) then
         resu.tipo := NoEntra
     else if not puedeArmarPalabra(pal, posTemp, mano, tab) then
@@ -246,26 +249,33 @@ begin
         resu.tipo := NoExiste
     else
     begin
-        resu.tipo := Valida;
-        for j := 1 to pal.tope do
+        for i := 1 to pal.tope do
         begin
             if not tab[posTemp.fila, posTemp.col].ocupada then
             begin
-                resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje;
+                puntajeLetra := info[pal.cadena[i]].puntaje;
+
                 case tab[posTemp.fila, posTemp.col].bonus of
-                    Ninguno: resu.puntaje := resu.puntaje;
-                    DobleLetra: resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje * 2;
-                    TriplePalabra: 
-                    begin
-                        triple := true;
-                        resu.puntaje := resu.puntaje + info[pal.cadena[j]].puntaje;
-                        resu.puntaje := resu.puntaje * 3;
-                    end;
-                    Trampa: resu.puntaje := resu.puntaje - info[pal.cadena[j]].puntaje;
+                    Ninguno: puntajeLetra := puntajeLetra;
+                    DobleLetra: puntajeLetra := puntajeLetra * 2;
+                    TriplePalabra: triple := triple * 3;
+                    Trampa: 
+                        begin
+                            resu.puntaje := resu.puntaje - puntajeLetra;
+                            puntajeLetra := 0; // No se suma puntaje por la trampa
+                        end;
                 end;
+                tab[posTemp.fila, posTemp.col].ficha   := pal.cadena[i];
+                tab[posTemp.fila, posTemp.col].ocupada := true;
+                removerLetraAtril(mano, pal.cadena[i]);
+                resu.puntaje := resu.puntaje + puntajeLetra;
             end;
-            siguientePosicion(posTemp);
+            if i < pal.tope then
+            { Si no es la última letra, se pasa a la siguiente posición }
+                siguientePosicion(posTemp);
         end;
+             resu.puntaje := resu.puntaje * triple;
+
     end;
 end;
 
@@ -283,21 +293,19 @@ procedure registrarJugada(var jugadas : HistorialJugadas; pal : Palabra; pos : P
 }
 var i : integer;
     nodo : HistorialJugadas;
+    cursor : HistorialJugadas;
 begin
     i := 1;
-    while (jugadas^.sig <> nil) do
+    jugadas := nil;
+    nodo^.sig := nil;
+    cursor := jugadas;
+    new(nodo);
+    while (cursor^.sig <> nil) do
     begin
-        jugadas := jugadas^.sig;
-        puntaje := jugadas^.puntaje + puntaje;
+        cursor := cursor^.sig;
         i := i + 1;
     end;
-    new(nodo);{ Crea un nuevo nodo para la jugada }
-    nodo^.palabra := pal; { Asigna la palabra a la jugada }
-    nodo^.pos := pos; { Asigna la posición a la jugada }
-    nodo^.puntaje := puntaje; { Asigna el puntaje a la jugada }
-    nodo^.sig := nil;
-
-
-    { Agrega la jugada al final de la lista }
-
+    cursor^.palabra := pal; { Asigna la palabra a la jugada }
+    cursor^.pos := pos; { Asigna la posición a la jugada }
+    cursor^.puntaje := puntaje; { Asigna el puntaje a la jugada }
 end;

@@ -1,1 +1,0 @@
-Binary files ./salidas/09_03.txt and ./mios/09_03.txt differ

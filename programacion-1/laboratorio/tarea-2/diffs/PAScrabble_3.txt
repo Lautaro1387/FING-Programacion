@@ -1,4 +1,0 @@
-104c104
-< La palabra no existe en el diccionario.
----
-> No hay fichas en el atril y tablero para armar la palabra.
