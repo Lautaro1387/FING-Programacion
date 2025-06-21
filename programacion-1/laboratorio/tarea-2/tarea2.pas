@@ -300,9 +300,7 @@ begin
     nuevo^.pos := pos; { Asigna la posición a la jugada }
     nuevo^.puntaje := puntaje; { Asigna el puntaje a la jugada }
     if jugadas = nil then
-    begin
-        jugadas := nuevo;
-    end
+        jugadas := nuevo
     else
     begin
         cursor := jugadas;
