@@ -1,9 +1,0 @@
-264,269c264
-< Historial de jugadas:
-< Palabra        Coordenadas        Dirección        Puntaje
-< ----------------------------------------------------------
-< acera               I1            Horizonal          117
-< peca                F1            Vertical           14
-< pala                F1            Horizonal          7
----
-> No hay jugadas en registradas.

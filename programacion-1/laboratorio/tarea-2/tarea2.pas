@@ -291,21 +291,27 @@ procedure registrarJugada(var jugadas : HistorialJugadas; pal : Palabra; pos : P
       sig : HistorialJugadas
    end;
 }
-var i : integer;
-    nodo : HistorialJugadas;
+var nuevo : HistorialJugadas;
     cursor : HistorialJugadas;
 begin
-    i := 1;
-    jugadas := nil;
-    nodo^.sig := nil;
-    cursor := jugadas;
-    new(nodo);
-    while (cursor^.sig <> nil) do
+    new(nuevo);
+    nuevo^.sig := nil; { El nuevo nodo no apunta a nada }
+    nuevo^.palabra := pal; { Asigna la palabra a la jugada }
+    nuevo^.pos := pos; { Asigna la posición a la jugada }
+    nuevo^.puntaje := puntaje; { Asigna el puntaje a la jugada }
+    if jugadas = nil then
     begin
-        cursor := cursor^.sig;
-        i := i + 1;
+        jugadas := nuevo;
+    end
+    else
+    begin
+        cursor := jugadas;
+        while (cursor^.sig <> nil) do
+            cursor := cursor^.sig;
+    cursor^.sig := nuevo; { Asigna el siguiente nodo al cursor }
     end;
-    cursor^.palabra := pal; { Asigna la palabra a la jugada }
-    cursor^.pos := pos; { Asigna la posición a la jugada }
-    cursor^.puntaje := puntaje; { Asigna el puntaje a la jugada }
+    nuevo^.sig := nil; { El nuevo nodo no apunta a nada }
+    nuevo^.palabra := pal; { Asigna la palabra a la jugada }
+    nuevo^.pos := pos; { Asigna la posición a la jugada }
+    nuevo^.puntaje := puntaje; { Asigna el puntaje a la jugada }
 end;

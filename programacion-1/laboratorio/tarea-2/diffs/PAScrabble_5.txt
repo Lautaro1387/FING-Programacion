@@ -1,9 +1,0 @@
-394,399c394
-< Historial de jugadas:
-< Palabra        Coordenadas        Dirección        Puntaje
-< ----------------------------------------------------------
-< acera               E1            Horizonal          39
-< pecara              A4            Vertical           16
-< ria                 C1            Vertical           7
----
-> No hay jugadas en registradas.
